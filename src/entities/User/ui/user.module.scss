@@ -1,0 +1,14 @@
+.userIcon {
+    border-radius: 50%;
+    background: #fff;
+
+    width: 4em;
+    height: 4em;
+    margin: auto 1em;
+}
+.avatar {
+    :global(svg){
+        width: 2em;
+        height: 1.5em;
+    }
+}
