@@ -20,7 +20,6 @@ export const MoviePreview = () => {
 
 		dispatch(loadMovieById(parseInt(id)))
 
-		console.log(id, 'id')
 	}, [id])
 
 	return (

@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { MovieService, GetDTO } from '../api/movie.service'
 import { MovieDocsResponseDtoV14 } from '@shared/types/types'
+import { DictionaryTypes } from '../../../entities/DictionaryLoader'
+import { Filter } from '../api/movieApi.service'
 
 interface Pagination {
 	page: number
@@ -12,6 +14,7 @@ export interface State {
 	loading: boolean
 	error: string | null | undefined
 	pagination: Pagination
+	filter: Filter | null
 }
 
 const initial: State = {
@@ -21,7 +24,8 @@ const initial: State = {
 	pagination: {
 		page: 1,
 		limit: 20
-	}
+	},
+	filter: null
 }
 
 // Асинхронное действие для запроса к API
@@ -37,6 +41,12 @@ const viewMoviesSlice = createSlice({
 	reducers: {
 		updatePagination(state, action: PayloadAction<Pagination>) {
 			state.pagination = action.payload
+		},
+		updateFilters(state, action: PayloadAction<Filter>) {
+			state.filter = {
+				...state.filter,
+				...action.payload,
+			};
 		}
 	},
 	extraReducers: (builder) => {
@@ -56,6 +66,6 @@ const viewMoviesSlice = createSlice({
 	}
 })
 
-export const { updatePagination } = viewMoviesSlice.actions
+export const { updatePagination, updateFilters} = viewMoviesSlice.actions
 
 export const viewMoviesReducer = viewMoviesSlice.reducer

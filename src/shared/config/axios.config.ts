@@ -1,13 +1,9 @@
 import axios from 'axios'
 
-export const AxiosFetch = axios.create({
-	headers: {
-		'X-API-KEY': window._env_.API_KEY,
-		'Content-Type': 'application/json',
-	}
-})
+export const AxiosFetch = axios.create()
 
 AxiosFetch.interceptors.request.use(async (config) => {
-	config.headers['X-API-KEY'] =  window._env_.API_KEY
+	config.headers['X-API-KEY'] = window._env_.API_KEY
+	config.headers['Content-Type'] = 'application/json'
 	return config
 })

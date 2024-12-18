@@ -3,6 +3,9 @@ import path, { resolve } from 'path'
 import { UserConfigExport, defineConfig } from 'vite'
 
 export default defineConfig({
+	server:{
+		port: 3001
+	},
 	plugins: [react()],
 	build: {
 		rollupOptions: {

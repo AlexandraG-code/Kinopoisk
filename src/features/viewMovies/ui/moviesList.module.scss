@@ -13,8 +13,16 @@
 }
 
 .container {
-    max-height: 82vh;
+    max-height: 75vh;
     overflow: auto;
     border: 1px solid #ddd;
+}
 
+.filterContainer {
+    padding: 1.5em;
+    background: #b6b5b5;
+
+    .filterItem {
+        width: 15em ;
+    }
 }
