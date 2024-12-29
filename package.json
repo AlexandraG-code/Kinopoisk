@@ -8,7 +8,9 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "generate:api": "swagger-typescript-api -p https://api.kinopoisk.dev/documentation-json  -o src/shared/types -n types.ts"
+    "generate:api": "swagger-typescript-api -p https://api.kinopoisk.dev/documentation-json  -o src/shared/types -n types.ts",
+    "generate:api-from-file": "swagger-typescript-api -p ./public/swaggerfile.json  -o src/shared/types -n typesFile.ts",
+    "generate:api-from-dev": "swagger-typescript-api -p http://localhost:5001/api/swagger/v1/swagger.json  -o src/shared/types -n types.swagger.ts"
   },
   "dependencies": {
     "@ant-design/icons": "^5.5.1",

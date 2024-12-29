@@ -3,11 +3,6 @@
     width: 100%;
 }
 
-.personsContainer {
-    margin: 1em auto;
-    max-width: 75vw;
-    overflow: auto;
-}
 
 
 .mainPoster {
@@ -22,14 +17,3 @@
     }
 }
 
-.poster {
-    width: 15em;
-    height: 15em;
-    background: #aaa5a5;
-
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover; /* или 'contain', в зависимости от желаемого эффекта */
-    }
-}

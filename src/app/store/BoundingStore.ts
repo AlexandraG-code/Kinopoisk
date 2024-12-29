@@ -17,7 +17,7 @@ const loggerMiddleware = (store: any) => (next: any) => (action: any) => {
 }
 
 const middleware = (getDefaultMiddleware: any) =>
-	getDefaultMiddleware().concat(movieApiService.middleware, dictionaryService.middleware,  loggerMiddleware) // Объединяем middleware
+	getDefaultMiddleware().concat(movieApiService.middleware, dictionaryService.middleware,   ) // Объединяем middleware
 
 export const store = configureStore({
 	reducer: {
