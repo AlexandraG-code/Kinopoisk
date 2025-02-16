@@ -1,5 +1,6 @@
-import { DictionaryTypes, ResponseDictionary } from './api.types'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+
+import { DictionaryTypes, ResponseDictionary } from './api.types'
 
 export const dictionaryService = createApi({
 	reducerPath: 'dictionary',

@@ -1,7 +1,8 @@
-import React, { createContext, PropsWithChildren, useContext, useState } from 'react'
+import React, { PropsWithChildren, createContext, useContext, useState } from 'react'
+
+import { MovieDtoV14 } from '@shared/types/types'
 
 import { MovieService } from '../api/movie.service'
-import { MovieDtoV14 } from '../../../shared/types/types'
 
 const defaultContextValue = {
 	movie: {} as MovieDtoV14,
@@ -12,13 +13,12 @@ const defaultContextValue = {
 }
 
 const MovieContext = createContext<{
-	movie: MovieDtoV14
+	movie: MovieDtoV14 | null
 	loadMovieData: (id: number) => Promise<void>
 	loading: boolean
 }>(defaultContextValue)
 
 export function MovieProvider({ children }: PropsWithChildren) {
-
 	const [movie, setMovie] = useState<MovieDtoV14 | null>(null)
 	const [loading, setLoading] = useState<boolean>(false)
 
@@ -29,7 +29,6 @@ export function MovieProvider({ children }: PropsWithChildren) {
 		setMovie(response)
 
 		setLoading(false)
-
 	}
 
 	const value = {

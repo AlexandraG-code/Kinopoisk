@@ -1,15 +1,14 @@
-import {cloneElement, isValidElement, memo, ReactElement, ReactNode, useMemo} from 'react'
+import { ReactElement, ReactNode, cloneElement, isValidElement, memo, useMemo } from 'react'
+
+import { clsx } from 'clsx'
+
+import styles from './avatarBox.module.scss'
 
 export interface IAvatarBox {
 	children: ReactNode
 }
 
-import { clsx } from 'clsx'
-import styles from './avatarBox.module.scss'
-
 export const AvatarBox = memo(({ children }: IAvatarBox) => {
-
-
 	const clickHandle = () => {
 		console.log('click')
 	}

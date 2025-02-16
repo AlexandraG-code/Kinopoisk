@@ -1,7 +1,10 @@
-import {  NavLink } from 'react-router-dom'
 import { PropsWithChildren } from 'react'
-import styles from './sidebarLink.module.scss'
+
+import { NavLink } from 'react-router-dom'
+
 import { clsx } from 'clsx'
+
+import styles from './sidebarLink.module.scss'
 
 interface ISidebarLink extends PropsWithChildren {
 	to: string

@@ -1,30 +1,29 @@
-@use "sass:color";
+@use 'sass:color';
 
 .link {
-    font-size: 1.5em;
-    font-weight: 500;
-    color: #242424;
+	font-size: 1.5em;
+	font-weight: 500;
+	color: #242424;
 
-    padding: 0.5em;
-    transition: 0.2s linear;
+	padding: 0.5em;
+	transition: 0.2s linear;
 
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid  color.scale(#242424, $lightness: 90%);;
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid color.scale(#242424, $lightness: 90%);
 
-    &:hover {
-        color: #242424 !important;
-        background: color.scale(#242424, $lightness: 85%);
-    }
+	&:hover {
+		color: #242424 !important;
+		background: color.scale(#242424, $lightness: 85%);
+	}
 }
 
-
 .active {
-    background: #242424;
-    color: #ffff;
+	background: #242424;
+	color: #ffff;
 
-    &:hover {
-        color: #fff !important;
-        background: color.scale(#242424, $lightness: 10%);
-    }
+	&:hover {
+		color: #fff !important;
+		background: color.scale(#242424, $lightness: 10%);
+	}
 }

@@ -1,4 +1,5 @@
-import React, { cloneElement, ReactElement } from 'react'
+import React, { ReactElement, cloneElement } from 'react'
+
 import { Button, Divider, Flex, Menu, Popover } from 'antd'
 
 import styles from './user.module.scss'

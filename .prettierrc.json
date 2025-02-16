@@ -1,4 +1,7 @@
 {
+  "plugins": [
+    "@trivago/prettier-plugin-sort-imports"
+  ],
   "trailingComma": "none",
   "tabWidth": 4,
   "useTabs": true,
@@ -7,6 +10,10 @@
   "printWidth": 120,
   "importOrder": [
     "<THIRD_PARTY_MODULES>",
+    "^react$",
+    "^react.*",
+    "^[a-z]",
+    "^@ant.*",
     "^@app/(.*)$",
     "^@pages/(.*)$",
     "^@widgets/(.*)$",
@@ -15,7 +22,8 @@
     "^@shared/(.*)$",
     "^../(.*)$",
     "^./(.*)$",
-    "(.scss)$"
+    "^.*.module.scss$",
+    "^.*.scss$"
   ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true

@@ -1,0 +1,33 @@
+# Игнорировать директорию node_modules
+node_modules/
+
+# Игнорировать директорию dist
+dist/
+
+# Игнорировать директорию dist
+build/
+
+# Игнорировать файл .gitignore
+.gitignore
+
+# Игнорировать файл tsconfig.json
+tsconfig.json
+
+
+# Игнорировать файл yarn.lock
+yarn.lock
+
+# Игнорировать файл package.json
+package.json
+
+# Игнорировать файл env-config.ts
+env-config.ts
+
+# Игнорировать файл main.tsx
+main.tsx
+
+# Игнорировать все файлы с расширением .yaml
+*.yaml
+
+# Игнорировать все файлы с расширением .yml
+*.yml

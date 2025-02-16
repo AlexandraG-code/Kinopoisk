@@ -1,12 +1,15 @@
 import react from '@vitejs/plugin-react'
-import path, { resolve } from 'path'
-import { UserConfigExport, defineConfig } from 'vite'
 
+import path, { resolve } from 'path'
+
+import { UserConfigExport, defineConfig } from 'vite'
 export default defineConfig({
-	server:{
+	plugins: [
+		react(),
+	],
+	server: {
 		port: 3001
 	},
-	plugins: [react()],
 	build: {
 		rollupOptions: {
 			input: {
@@ -21,13 +24,13 @@ export default defineConfig({
 	},
 	resolve: {
 		alias: {
-			'@assets': path.resolve(__dirname, './src/assets'),
-			'@features': path.resolve(__dirname, './src/features'),
 			'@app': path.resolve(__dirname, './src/app'),
+			'@features': path.resolve(__dirname, './src/features'),
 			'@pages': path.resolve(__dirname, './src/pages'),
 			'@widgets': path.resolve(__dirname, './src/widgets'),
 			'@entities': path.resolve(__dirname, './src/entities'),
-			'@shared': path.resolve(__dirname, './src/shared')
+			'@shared': path.resolve(__dirname, './src/shared'),
+			'@services': path.resolve(__dirname, './src/services')
 		}
 	}
 } as UserConfigExport)

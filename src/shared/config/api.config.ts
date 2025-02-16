@@ -6,23 +6,24 @@ interface ApiCreator extends Omit<CreateApiOptions<BaseQueryFn, EndpointDefiniti
 		header: string
 		value: string
 	}[]
-	baseQueryFn: BaseQueryFn
+	baseUrl: string
 }
 
-export const apiCreator = ({ requestHeaders = [], baseQueryFn, ...props }: ApiCreator) => {
+export const apiCreator = ({ requestHeaders = [], baseUrl, ...props }: ApiCreator) => {
 	return createApi({
 		baseQuery: fetchBaseQuery({
-			...baseQueryFn,
+			baseUrl,
 			prepareHeaders: (headers) => {
 				// заголовки по умолчанию
 				headers.set('X-API-KEY', window._env_.API_KEY)
 				headers.set('Content-Type', 'application/json')
 
-				requestHeaders.values()?.map(({ header, value }) => headers.set(header, value))
+				requestHeaders.forEach(({ header, value }) => headers.set(header, value))
 
 				return headers
 			}
 		}),
+
 		...props
 	})
 }

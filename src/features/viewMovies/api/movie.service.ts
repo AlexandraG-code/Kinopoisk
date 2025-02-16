@@ -1,5 +1,5 @@
 import { AxiosFetch } from '@shared/config/axios.config'
-import {MovieDocsResponseDtoV14} from "@shared/types/types";
+import { MovieDocsResponseDtoV14 } from '@shared/types/types'
 
 export interface GetDTO {
 	page: number
@@ -11,11 +11,9 @@ export const MovieService = {
 
 	async getFilms(params: GetDTO) {
 		return (
-			await AxiosFetch.get<MovieDocsResponseDtoV14>(`${this.serviceUrl}/movie`,  {
+			await AxiosFetch.get<MovieDocsResponseDtoV14>(`${this.serviceUrl}/movie`, {
 				params: params
 			})
 		)?.data
-	},
-
-
+	}
 }

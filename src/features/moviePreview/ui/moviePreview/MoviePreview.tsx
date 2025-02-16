@@ -1,36 +1,26 @@
-import { Card, Flex, Spin } from 'antd'
 import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { AppDispatch, RootState } from '@app/store/BoundingStore'
-import { useDispatch, useSelector } from 'react-redux'
-import { loadMovieById } from '../model/movieSlice'
-import styles from './moviePreview.module.scss'
+
+import { useNavigate, useParams } from 'react-router-dom'
+
+import { Flex, Spin } from 'antd'
 import { clsx } from 'clsx'
-import { useMovieContext } from '../model/MovieProvider'
-import { PersonsBox } from './personsBox/PersonsBox'
+
+import { useMovieContext } from '../../model/MovieProvider'
+import { PersonsBox } from '../personsBox/PersonsBox'
+
+import styles from './moviePreview.module.scss'
 
 export const MoviePreview = () => {
 	const { id } = useParams()
+	const navigate = useNavigate()
 
-	const dispatch: AppDispatch = useDispatch()
-	// const { loading, movieInfo } = useSelector((state: RootState) => state.movie)
 	const { movie: movieInfo, loadMovieData, loading } = useMovieContext()
-
-	// useEffect(() => {
-	// 	if (!id) {
-	// 		return
-	// 	}
-	//
-	// 	dispatch(loadMovieById(parseInt(id)))
-	//
-	// }, [id])
-
 	useEffect(() => {
 		if (!id) {
 			return
 		}
 
-		loadMovieData(id)
+		loadMovieData(Number(id))
 	}, [id])
 
 	return (
@@ -52,7 +42,7 @@ export const MoviePreview = () => {
 						</div>
 					</Flex>
 				</Flex>
-				<PersonsBox  />
+				<PersonsBox persons={movieInfo?.persons ?? []} onSelectPerson={(personId) => navigate(`${personId}`)} />
 			</Flex>
 		</Spin>
 	)

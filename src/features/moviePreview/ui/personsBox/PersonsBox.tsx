@@ -1,23 +1,25 @@
+import React from 'react'
+
 import { Card, Flex } from 'antd'
 import { clsx } from 'clsx'
-import styles from './PersonsBox.module.scss'
-import React, { useEffect } from 'react'
-import { useMovieContext } from '../../model/MovieProvider'
+
+import { PersonInMovie } from '@shared/types/types'
+
 import { Avatar } from '../avatar/Avatar'
 import { AvatarBox } from '../avatarBox/AvatarBox'
 
-export const PersonsBox = () => {
-	const { movie: movieInfo } = useMovieContext()
+import styles from './PersonsBox.module.scss'
 
-	useEffect(() => {
-		console.log(movieInfo, 'in PersonsBox')
-	}, [movieInfo])
+export interface IPersonsBox {
+	persons: PersonInMovie[]
+	onSelectPerson?: (id: number) => void
+}
 
+export const PersonsBox = ({ persons, onSelectPerson }: IPersonsBox) => {
 	return (
 		<Flex className={clsx(styles.personsContainer)} align={'center'}>
-			{movieInfo?.persons?.map((person) => (
-				<Flex vertical>
-
+			{persons?.map((person) => (
+				<Flex vertical onClick={() => onSelectPerson?.(person?.id)}>
 					<Card>
 						<AvatarBox>
 							<Avatar imgUrl={person.photo ?? ''} alt={person.name ?? ''} />

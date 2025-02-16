@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { MovieService } from '../api/movie.service'
+
 import { MovieDtoV14 } from '@shared/types/types'
+
+import { MovieService } from '../api/movie.service'
 
 export interface State {
 	movieInfo: MovieDtoV14 | null

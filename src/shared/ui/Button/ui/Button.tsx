@@ -1,8 +1,10 @@
 import { PropsWithChildren } from 'react'
 
-import styles from './button.module.scss'
-import { ButtonType, ButtonTypeEnum } from '../lib/button.types'
 import { clsx } from 'clsx'
+
+import { ButtonType, ButtonTypeEnum } from '../lib/button.types'
+
+import styles from './button.module.scss'
 
 export interface IButton extends PropsWithChildren {
 	type?: ButtonType

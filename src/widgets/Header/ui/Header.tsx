@@ -1,7 +1,10 @@
-import styles from './header.module.scss'
-import { User } from '@entities/User'
 import React from 'react'
+
 import { UserOutlined } from '@ant-design/icons'
+
+import { User } from '@entities/User'
+
+import styles from './header.module.scss'
 
 export const Header = () => {
 	return (

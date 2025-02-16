@@ -1,16 +1,22 @@
 import React, { useEffect, useMemo } from 'react'
-import { Button, Card, Divider, Flex, Form, Pagination, Select, Spin } from 'antd'
-import { updateFilters, updatePagination } from '../model/viewMoviesSlice'
-import { useLocation, useNavigate } from 'react-router-dom'
+
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from '@app/store/BoundingStore'
-import styles from './moviesList.module.scss'
+import { useNavigate } from 'react-router-dom'
+
+import { Button, Card, Divider, Flex, Form, Pagination, Select, Spin } from 'antd'
+import { useForm } from 'antd/es/form/Form'
 import { clsx } from 'clsx'
+import { DefaultOptionType } from 'rc-select/lib/Select'
+
+import { AppDispatch, RootState } from '@app/store/BoundingStore'
+
 import { useGetDictionaryQuery } from '@entities/DictionaryLoader'
 import { DictionaryTypes } from '@entities/DictionaryLoader'
-import { DefaultOptionType } from 'rc-select/lib/Select'
-import { useForm } from 'antd/es/form/Form'
+
 import { useGetAndFilterMoviesQuery } from '../api/movieApi.service'
+import { updateFilters, updatePagination } from '../model/viewMoviesSlice'
+
+import styles from './moviesList.module.scss'
 
 export const MoviesList = () => {
 	const dispatch: AppDispatch = useDispatch()

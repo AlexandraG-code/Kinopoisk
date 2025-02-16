@@ -1,7 +1,9 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { MovieService, GetDTO } from '../api/movie.service'
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+
 import { MovieDocsResponseDtoV14 } from '@shared/types/types'
+
 import { DictionaryTypes } from '../../../entities/DictionaryLoader'
+import { GetDTO, MovieService } from '../api/movie.service'
 import { Filter } from '../api/movieApi.service'
 
 interface Pagination {
@@ -45,8 +47,8 @@ const viewMoviesSlice = createSlice({
 		updateFilters(state, action: PayloadAction<Filter>) {
 			state.filter = {
 				...state.filter,
-				...action.payload,
-			};
+				...action.payload
+			}
 		}
 	},
 	extraReducers: (builder) => {
@@ -66,6 +68,6 @@ const viewMoviesSlice = createSlice({
 	}
 })
 
-export const { updatePagination, updateFilters} = viewMoviesSlice.actions
+export const { updatePagination, updateFilters } = viewMoviesSlice.actions
 
 export const viewMoviesReducer = viewMoviesSlice.reducer

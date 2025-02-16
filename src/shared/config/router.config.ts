@@ -2,5 +2,6 @@ export const routerConfig = {
 	main: '/',
 	about: 'about',
 	notFound: '*',
-	films: 'films'
+	films: 'films',
+	person: 'person'
 }
