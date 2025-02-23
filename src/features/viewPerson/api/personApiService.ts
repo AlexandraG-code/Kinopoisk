@@ -1,8 +1,17 @@
 import { EndpointBuilder, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
+import { apiCreator } from '@shared/config/api.config'
 import { Person } from '@shared/types/types'
-import {apiCreator} from "@shared/config/api.config";
 
+// export const personApiService = apiCreator({
+// 	baseUrl: `${window._env_.API_URL}/${window._env_.API_VERSION}`,
+// 	tagTypes: ['persons'],
+// 	endpoints: (builder) => ({
+// 		getPersonById: builder.query<Person, number>({
+// 			query: (personId) => `person/${personId}`,
+// 		}),
+// 	}),
+// });
 
 export const personApiService = createApi({
 	reducerPath: 'person',
@@ -24,15 +33,5 @@ export const personApiService = createApi({
 		})
 	})
 })
-
-// export const personApiService = apiCreator({
-// 	baseUrl: `${window._env_.API_URL}/${window._env_.API_VERSION}`,
-// 	tagTypes: ['persons'],
-// 	endpoints: (builder) => ({
-// 		getPersonById: builder.query<Person, number>({
-// 			query: (personId) => `person/${personId}`,
-// 		}),
-// 	}),
-// });
 
 export const { useGetPersonByIdQuery } = personApiService

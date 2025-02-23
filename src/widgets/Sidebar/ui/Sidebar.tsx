@@ -1,11 +1,9 @@
-import { Link } from 'react-router-dom'
-
 import { Flex } from 'antd'
 
-import { routerConfig } from '@shared/config/router.config'
+import { routerConfig } from '@shared/config/router.config.js'
 
 import styles from './sidebar.module.scss'
-import { SidebarLink } from './sidebarLink/SidebarLink'
+import { SidebarLink } from './sidebarLink/SidebarLink.js'
 
 export const Sidebar = () => {
 	return (

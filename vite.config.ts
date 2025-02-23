@@ -1,12 +1,10 @@
 import react from '@vitejs/plugin-react'
 
 import path, { resolve } from 'path'
-
 import { UserConfigExport, defineConfig } from 'vite'
+
 export default defineConfig({
-	plugins: [
-		react(),
-	],
+	plugins: [react()],
 	server: {
 		port: 3001
 	},
