@@ -10,7 +10,7 @@
 		"strict": true,
 		"forceConsistentCasingInFileNames": true,
 		"module": "ESNext",
-		"moduleResolution": "Bundler",
+		"moduleResolution": "Node",
 
 		"resolveJsonModule": true,
 		"isolatedModules": true,
@@ -26,6 +26,7 @@
 			"@pages/*": ["pages/*"]
 		}
 	},
-	"references": [{ "path": "./tsconfig.node.json" }],
 	"include": ["src/**/*",  "src/**/*.d.ts", "global.d.ts", "styles.d.ts"],
 }
+
+
