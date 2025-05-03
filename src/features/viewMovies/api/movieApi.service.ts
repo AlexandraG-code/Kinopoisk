@@ -44,7 +44,7 @@ export const movieApiService = createApi({
 					...params
 				}).toString()
 
-				return `movie?${queryString}` // Используем GET запрос
+				return `movie?${queryString}` // Используем GET запроса
 			}
 		})
 	})

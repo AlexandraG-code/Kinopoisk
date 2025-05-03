@@ -1,6 +1,7 @@
 import { Middleware, PayloadAction, configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 
+import { authReducer } from '@features/authentication'
 import { movieReducer } from '@features/moviePreview'
 import { movieApiService, viewMoviesReducer } from '@features/viewMovies'
 import { personApiService } from '@features/viewPerson/api/personApiService'
@@ -36,6 +37,7 @@ export const store = configureStore({
 	reducer: {
 		viewFilms: viewMoviesReducer,
 		movie: movieReducer,
+		auth: authReducer,
 		[movieApiService.reducerPath]: movieApiService.reducer,
 		[dictionaryService.reducerPath]: dictionaryService.reducer,
 		[personApiService.reducerPath]: personApiService.reducer

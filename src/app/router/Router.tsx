@@ -16,14 +16,18 @@ export const Router = () => {
 	const router = useMemo(() => {
 		return createBrowserRouter(
 			createRoutesFromElements(
-				<Route path="/*" element={<MainLayout />}>
+				<>
+					<Route path={routerConfig.notFound} element={<NotFoundPage />} />
+
+					<Route path="/*" element={<MainLayout />}>
 					<Route index path={`${routerConfig.main}*`} element={<MainPage />} />
 					<Route path={routerConfig.about} element={<AboutPage />} />
-					<Route path={routerConfig.notFound} element={<NotFoundPage />} />
 					<Route path={routerConfig.films} element={<MoviesPage />} />
 					<Route path={`${routerConfig.films}/:id`} element={<MoviePage />} />
 					<Route path={`${routerConfig.films}/:id/:personId`} element={<PersonPage />} />
 				</Route>
+				</>
+
 			)
 		)
 	}, [])

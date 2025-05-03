@@ -3,5 +3,6 @@ export const routerConfig = {
 	about: 'about',
 	notFound: '*',
 	films: 'films',
-	person: 'person'
+	person: 'person',
+	login: 'login'
 }
