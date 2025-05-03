@@ -9,11 +9,7 @@
 		"preview": "vite preview",
 		"format": "prettier --write . --log-level=debug",
 		"format:dir": "prettier --write  --log-level=debug",
-		"generate:api": "swagger-typescript-api -p https://api.kinopoisk.dev/documentation-json  -o src/shared/types -n types.ts",
-		"generate:api-from-file": "swagger-typescript-api -p ./public/swaggerfile.json  -o src/shared/types -n typesFile.ts --split",
-		"generate:api-from-dev": "swagger-typescript-api -p http://localhost:5001/api/swagger/v1/swagger.json  -o src/shared/types -n api.ts --split",
-		"open-api": "openapi-typescript http://localhost:5001/api/swagger/v1/swagger.json --output src/shared/types/api.ts --split",
-		"gen": "swagger-typescript-api -p http://localhost:5001/api/swagger/v1/swagger.json  -o src/shared/types -n apiTest.ts --modular  --axios --route-types --no-client   --type-prefix swagger"
+		"generate:api": "swagger-typescript-api -p https://api.kinopoisk.dev/documentation-json  -o src/shared/types -n types.ts"
 	},
 	"dependencies": {
 		"@ant-design/icons": "^5.5.1",

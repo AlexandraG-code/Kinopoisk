@@ -15,10 +15,10 @@ export type AppDispatch = typeof store.dispatch
 // Создаем middleware для логирования
 // @ts-ignore
 const loggerMiddleware: Middleware<{}, RootState> = (store) => (next) => (action: PayloadAction) => {
-	console.log('Действие:', action)
-	console.log('Предыдущее состояние:', store.getState())
+	// console.log('Действие:', action)
+	// console.log('Предыдущее состояние:', store.getState())
 	const result = next(action) // Передаем действие дальше
-	console.log('Новое состояние:', store.getState())
+	// console.log('Новое состояние:', store.getState())
 	return result
 }
 // @ts-ignore

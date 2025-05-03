@@ -10,8 +10,7 @@ import { DefaultOptionType } from 'rc-select/lib/Select'
 
 import { AppDispatch, RootState } from '@app/store/BoundingStore'
 
-import { useGetDictionaryQuery } from '@entities/DictionaryLoader'
-import { DictionaryTypes } from '@entities/DictionaryLoader'
+import { DictionaryTypes, useGetDictionaryQuery } from '@entities/DictionaryLoader'
 
 import { useGetAndFilterMoviesQuery } from '../api/movieApi.service'
 import { updateFilters, updatePagination } from '../model/viewMoviesSlice'

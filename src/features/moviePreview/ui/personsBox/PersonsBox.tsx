@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Card, Flex } from 'antd'
+import { Button, Card, Flex } from 'antd'
 import { clsx } from 'clsx'
 
 import { PersonInMovie } from '@shared/types/types'
@@ -22,8 +22,9 @@ export const PersonsBox = ({ persons, onSelectPerson }: IPersonsBox) => {
 				<Flex vertical onClick={() => onSelectPerson?.(person?.id)}>
 					<Card>
 						<AvatarBox>
-							<Avatar imgUrl={person.photo ?? ''} alt={person.name ?? ''} />
+							<Avatar className={'test ___1234'} imgUrl={person.photo ?? ''} alt={person.name ?? ''} />
 						</AvatarBox>
+
 						<h3>{person.name}</h3>
 						<div>{person.profession}</div>
 						<div>{person.description}</div>

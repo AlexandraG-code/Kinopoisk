@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode, cloneElement, isValidElement, memo, useMemo } from 'react'
+import { ReactNode, cloneElement, isValidElement, memo, useMemo } from 'react'
 
 import { clsx } from 'clsx'
 
@@ -9,10 +9,6 @@ export interface IAvatarBox {
 }
 
 export const AvatarBox = memo(({ children }: IAvatarBox) => {
-	const clickHandle = () => {
-		console.log('click')
-	}
-
 	const childrenBox = useMemo(
 		() => getClone(),
 
@@ -25,8 +21,7 @@ export const AvatarBox = memo(({ children }: IAvatarBox) => {
 		}
 		return cloneElement(children, {
 			...children.props,
-			className: clsx(styles.avatarImg, children.props.className),
-			onClick: clickHandle
+			className: clsx(styles.avatarImg, children.props.className)
 		})
 	}
 
