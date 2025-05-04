@@ -13,9 +13,7 @@ import '@shared/styles/index.scss'
 
 
 createRoot(document.getElementById('root')!).render(
-    // <StrictMode> // вызывает двойной рендеринг для выявления побочных эффектов
     <Provider store={store}>
         <Router/>
     </Provider>
-    // </StrictMode>
 )

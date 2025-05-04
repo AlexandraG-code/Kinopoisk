@@ -1,14 +1,15 @@
+import { useEffect } from 'react'
+
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
-import { Button, Card, Flex, Form, FormProps, Input } from 'antd'
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { Button, Card, Form, FormProps, Input } from 'antd'
 
-import { RootState } from '@app/store/BoundingStore'
-
-import { auth } from '@shared/config/firebase.config'
+import { AppDispatch, RootState } from '@app/store/BoundingStore'
 
 import { login } from '../../model'
-import { useEffect } from 'react'
+
+import styles from './AuthForm.module.scss'
 
 interface IAuthForm extends FormProps {}
 
@@ -16,21 +17,17 @@ export const AuthForm = ({ ...props }: IAuthForm) => {
 	const [authForm] = Form.useForm()
 
 	const { loading } = useSelector((state: RootState) => state.auth)
-	const dispatch = useDispatch()
+	const dispatch: AppDispatch = useDispatch()
+	const navigate = useNavigate()
 
 	const onFinish: FormProps['onFinish'] = async (data: any) => {
 		dispatch(login(data))
+		navigate(`/main`)
 	}
 
-	const { isAuthenticated , userCredentials} = useSelector((state: RootState) => state.auth)
-
-	useEffect(() => {
-		console.log(userCredentials,'isAuthenticated')
-	}, [isAuthenticated])
-
 	return (
-		<Card>
-			<Form form={authForm} {...props} onFinish={onFinish}>
+		<Card className={styles.form}>
+			<Form layout="vertical" form={authForm} {...props} onFinish={onFinish}>
 				<Form.Item name="email" label="Имя пользователя/Email">
 					<Input placeholder="Имя пользователя" />
 				</Form.Item>

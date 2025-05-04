@@ -18,7 +18,7 @@ const initial: State = {
 }
 
 // Асинхронное действие для запроса к API
-export const login = createAsyncThunk('auth/login', async (params: LoginDTO) => {
+export const login = createAsyncThunk('auth/login', async (params: any) => {
 	const credentials = await FirebaseService.firebaseLogin(params)
 
 	return JSON.stringify(credentials.user)
@@ -48,6 +48,7 @@ const authSlice = createSlice({
 			.addCase(login.fulfilled, (state, action) => {
 				state.loading = false
 				state.userCredentials = JSON.parse(action.payload)
+
 
 				state.isAuthenticated = true // Записываем данные в стейт
 			})

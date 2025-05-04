@@ -1,8 +1,21 @@
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
-import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import {
+	Navigate,
+	Route,
+	RouterProvider,
+	Routes,
+	createBrowserRouter,
+	createRoutesFromElements,
+	useNavigate
+} from 'react-router-dom'
+
+import { ProtectedRoute } from '@app/router/ProtectedRoute'
+import { RootState } from '@app/store/BoundingStore'
 
 import { AboutPage } from '@pages/About'
+import { AuthPage } from '@pages/AuthPage'
 import { MainLayout } from '@pages/Layout/ui/MainLayout'
 import { MainPage } from '@pages/Main'
 import { MoviePage } from '@pages/MoviePage'
@@ -19,15 +32,53 @@ export const Router = () => {
 				<>
 					<Route path={routerConfig.notFound} element={<NotFoundPage />} />
 
-					<Route path="/*" element={<MainLayout />}>
-					<Route index path={`${routerConfig.main}*`} element={<MainPage />} />
-					<Route path={routerConfig.about} element={<AboutPage />} />
-					<Route path={routerConfig.films} element={<MoviesPage />} />
-					<Route path={`${routerConfig.films}/:id`} element={<MoviePage />} />
-					<Route path={`${routerConfig.films}/:id/:personId`} element={<PersonPage />} />
-				</Route>
-				</>
+					<Route index element={<Navigate to={routerConfig.login} />} />
+					<Route path={routerConfig.login} element={<AuthPage />} />
 
+					<Route path="/*" element={<MainLayout />}>
+						<Route
+							index
+							path={`${routerConfig.main}*`}
+							element={
+								<ProtectedRoute>
+									<MainPage />
+								</ProtectedRoute>
+							}
+						/>
+						<Route
+							path={routerConfig.about}
+							element={
+								<ProtectedRoute>
+									<AboutPage />
+								</ProtectedRoute>
+							}
+						/>
+						<Route
+							path={routerConfig.films}
+							element={
+								<ProtectedRoute>
+									<MoviesPage />
+								</ProtectedRoute>
+							}
+						/>
+						<Route
+							path={`${routerConfig.films}/:id`}
+							element={
+								<ProtectedRoute>
+									<MoviePage />
+								</ProtectedRoute>
+							}
+						/>
+						<Route
+							path={`${routerConfig.films}/:id/:personId`}
+							element={
+								<ProtectedRoute>
+									<PersonPage />
+								</ProtectedRoute>
+							}
+						/>
+					</Route>
+				</>
 			)
 		)
 	}, [])

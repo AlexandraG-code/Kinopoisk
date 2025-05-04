@@ -1,8 +1,9 @@
 export const routerConfig = {
-	main: '/',
-	about: 'about',
+	main: 'main',
 	notFound: '*',
+	login: 'login',
+
+	about: 'about',
 	films: 'films',
-	person: 'person',
-	login: 'login'
+	person: 'person'
 }
