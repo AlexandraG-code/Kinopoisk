@@ -1,10 +1,9 @@
-import { useEffect } from 'react'
-
 import { useDispatch, useSelector } from 'react-redux'
 
 //todo  перенести в  shared
 import { RootState } from '@app/store/BoundingStore'
 
+import { auth } from '@shared/config/firebase.config'
 import { FirebaseService } from '@shared/service/firebase.service'
 
 import { setIsAuthenticated, setUserCredentials } from './AuthSlice'
@@ -16,19 +15,6 @@ export const useAuthorize = () => {
 	const { userCredentials, isAuthenticated, loading } = useSelector((state: RootState) => state.auth)
 	const dispatch = useDispatch()
 
-	useEffect(() => {
-		setAuthData()
-
-	}, [userCredentials])
-
-	const setAuthData = () => {
-		if (!userCredentials) {
-			return
-		}
-		dispatch(setUserCredentials(userCredentials))
-		dispatch(setIsAuthenticated(true))
-	}
-
 	const resetAuthData = async () => {
 		try {
 			await FirebaseService.firebaseLogout()
@@ -39,5 +25,5 @@ export const useAuthorize = () => {
 		}
 	}
 
-	return { isAuthenticated, loading, userCredentials, resetAuthData, setAuthData }
+	return { isAuthenticated, loading, userCredentials, resetAuthData, currentUser: auth.currentUser }
 }
