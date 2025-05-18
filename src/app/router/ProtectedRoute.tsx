@@ -1,22 +1,12 @@
-import { PropsWithChildren, useEffect } from 'react'
+import { PropsWithChildren } from 'react'
 
-import { Navigate } from 'react-router-dom'
+import { Navigate, useLocation } from 'react-router-dom'
 
-import { useAuthorize } from '@features/authentication/model/useAuthorize'
-import { useSelector } from 'react-redux'
-import { RootState } from '@app/store/BoundingStore'
+import { useAuthorize } from '@features/authentication'
 
 export const ProtectedRoute = ({ children }: PropsWithChildren) => {
-	const { setAuthData, checkIsAuth } = useAuthorize()
+	const { isAuthenticated } = useAuthorize()
+	const location = useLocation()
 
-	const { userCredentials } = useSelector((state: RootState) => state.auth)
-
-	useEffect(() => {
-
-		setAuthData()
-	}, [userCredentials])
-
-
-	// Если пользователь не аутентифицирован, перенаправляем на страницу логина
-	return checkIsAuth() ? children : <Navigate to="/login" replace state={{ path: location.pathname }} />
+	return isAuthenticated ? children : <Navigate to="/login" replace state={{ path: location.pathname }} />
 }

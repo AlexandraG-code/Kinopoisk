@@ -1,5 +1,8 @@
-import { Middleware, PayloadAction, configureStore } from '@reduxjs/toolkit'
+import { Middleware, PayloadAction, Reducer, combineReducers, configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
+
+import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer, persistStore } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
 
 import { authReducer } from '@features/authentication'
 import { movieReducer } from '@features/moviePreview'
@@ -22,29 +25,50 @@ const loggerMiddleware: Middleware<{}, RootState> = (store) => (next) => (action
 	// console.log('Новое состояние:', store.getState())
 	return result
 }
+
 // @ts-ignore
 const middleware = (getDefaultMiddleware) =>
-	getDefaultMiddleware().concat(
+	getDefaultMiddleware({
+		serializableCheck: {
+			ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+		}
+	}).concat(
 		movieApiService.middleware,
 		dictionaryService.middleware,
 		personApiService.middleware,
-		loggerMiddleware // Добавляем ваш middleware
+
+		loggerMiddleware // Добавляем ваш middleware,
 	)
+
+//корневой reducer
+const rootReducer = combineReducers({
+	viewFilms: viewMoviesReducer,
+	movie: movieReducer,
+	auth: authReducer,
+	[movieApiService.reducerPath]: movieApiService.reducer,
+	[dictionaryService.reducerPath]: dictionaryService.reducer,
+	[personApiService.reducerPath]: personApiService.reducer
+})
+
+// Настройка конфигурации для Redux Persist
+const persistConfig = {
+	key: 'root',
+	storage,
+	whitelist: ['auth'] // Указываем редюсеры, которые хотим сохранить
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 // Создаем store
 // @ts-ignore
 export const store = configureStore({
-	reducer: {
-		viewFilms: viewMoviesReducer,
-		movie: movieReducer,
-		auth: authReducer,
-		[movieApiService.reducerPath]: movieApiService.reducer,
-		[dictionaryService.reducerPath]: dictionaryService.reducer,
-		[personApiService.reducerPath]: personApiService.reducer
-	},
+	reducer: persistedReducer,
 	middleware,
 	devTools: process.env.NODE_ENV !== 'production' // Включаем devTools только в режиме разработки
 })
+
+// Создаем persistor
+export const persistor = persistStore(store)
 
 // Настраиваем слушатели
 setupListeners(store.dispatch)

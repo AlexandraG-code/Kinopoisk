@@ -1,5 +1,3 @@
-import { useEffect } from 'react'
-
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -7,21 +5,21 @@ import { Button, Card, Form, FormProps, Input } from 'antd'
 
 import { AppDispatch, RootState } from '@app/store/BoundingStore'
 
-import { login } from '../../model'
+import { GetUserDTO, login } from '../../model'
 
 import styles from './AuthForm.module.scss'
 
 interface IAuthForm extends FormProps {}
 
 export const AuthForm = ({ ...props }: IAuthForm) => {
-	const [authForm] = Form.useForm()
+	const [authForm] = Form.useForm<GetUserDTO>()
 
 	const { loading } = useSelector((state: RootState) => state.auth)
 	const dispatch: AppDispatch = useDispatch()
 	const navigate = useNavigate()
 
-	const onFinish: FormProps['onFinish'] = async (data: any) => {
-		dispatch(login(data))
+	const onFinish: FormProps['onFinish'] = async (data: GetUserDTO) => {
+		await dispatch(login(data))
 		navigate(`/main`)
 	}
 

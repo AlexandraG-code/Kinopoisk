@@ -1,7 +1,9 @@
 import { UserCredential } from '@firebase/auth'
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import { FirebaseService, LoginDTO } from '@shared/service/firebase.service'
+import { useDispatch } from 'react-redux'
+
+import { FirebaseService } from '@shared/service/firebase.service'
 
 export interface State {
 	loading: boolean
@@ -17,10 +19,15 @@ const initial: State = {
 	userCredentials: null
 }
 
-// Асинхронное действие для запроса к API
-export const login = createAsyncThunk('auth/login', async (params: any) => {
-	const credentials = await FirebaseService.firebaseLogin(params)
+export interface GetUserDTO {
+	email: string
+	password: string
+}
 
+// Асинхронное действие для запроса к API
+export const login = createAsyncThunk('auth/login', async (params: GetUserDTO) => {
+	const credentials = await FirebaseService.firebaseLogin(params)
+	// сериализуем данные , т.к Firebase возвращает их  в не том формате
 	return JSON.stringify(credentials.user)
 })
 
@@ -33,6 +40,10 @@ const authSlice = createSlice({
 		setIsAuthenticated(state, action: PayloadAction<boolean>) {
 			state.isAuthenticated = action.payload
 		},
+		setUserCredentials(state, action: PayloadAction<UserCredential | null>) {
+			state.userCredentials = action.payload
+		},
+
 		setLoading(state, action: PayloadAction<boolean>) {
 			state.loading = action.payload
 		}
@@ -49,7 +60,6 @@ const authSlice = createSlice({
 				state.loading = false
 				state.userCredentials = JSON.parse(action.payload)
 
-
 				state.isAuthenticated = true // Записываем данные в стейт
 			})
 			.addCase(login.rejected, (state, action) => {
@@ -60,6 +70,6 @@ const authSlice = createSlice({
 	}
 })
 
-export const { setIsAuthenticated, setLoading } = authSlice.actions
+export const { setIsAuthenticated, setLoading, setUserCredentials } = authSlice.actions
 
 export const authReducer = authSlice.reducer

@@ -12,7 +12,6 @@ import {
 } from 'react-router-dom'
 
 import { ProtectedRoute } from '@app/router/ProtectedRoute'
-import { RootState } from '@app/store/BoundingStore'
 
 import { AboutPage } from '@pages/About'
 import { AuthPage } from '@pages/AuthPage'
