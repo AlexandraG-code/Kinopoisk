@@ -1,33 +1,30 @@
-import { UserCredential } from '@firebase/auth'
+import { User, UserCredential } from '@firebase/auth'
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import { useDispatch } from 'react-redux'
+import firebase from 'firebase/compat'
 
-import { FirebaseService } from '@shared/service/firebase.service'
+import { FirebaseService, GetUserDTO } from '@shared/service/firebase.service'
 
 export interface State {
 	loading: boolean
 	isAuthenticated: boolean
 	error: string | null | undefined
 	userCredentials: UserCredential | null
+	currentUser: User | null
 }
 
 const initial: State = {
 	isAuthenticated: false,
 	loading: false,
 	error: null,
-	userCredentials: null
-}
-
-export interface GetUserDTO {
-	email: string
-	password: string
+	userCredentials: null,
+	currentUser: null
 }
 
 // Асинхронное действие для запроса к API
 export const login = createAsyncThunk('auth/login', async (params: GetUserDTO) => {
 	const credentials = await FirebaseService.firebaseLogin(params)
-	// сериализуем данные , т.к Firebase возвращает их  в не том формате
+	// сериализуем данные , т.к Firebase возвращает их в не том формате
 	return JSON.stringify(credentials.user)
 })
 
@@ -43,7 +40,9 @@ const authSlice = createSlice({
 		setUserCredentials(state, action: PayloadAction<UserCredential | null>) {
 			state.userCredentials = action.payload
 		},
-
+		setCurrentUser(state, action: PayloadAction<User>) {
+			state.currentUser = action.payload
+		},
 		setLoading(state, action: PayloadAction<boolean>) {
 			state.loading = action.payload
 		}
@@ -59,7 +58,6 @@ const authSlice = createSlice({
 			.addCase(login.fulfilled, (state, action) => {
 				state.loading = false
 				state.userCredentials = JSON.parse(action.payload)
-
 				state.isAuthenticated = true // Записываем данные в стейт
 			})
 			.addCase(login.rejected, (state, action) => {
@@ -70,6 +68,6 @@ const authSlice = createSlice({
 	}
 })
 
-export const { setIsAuthenticated, setLoading, setUserCredentials } = authSlice.actions
+export const { setIsAuthenticated, setLoading, setCurrentUser,  setUserCredentials } = authSlice.actions
 
 export const authReducer = authSlice.reducer

@@ -10,13 +10,13 @@ import { useAuthorize } from '@features/authentication'
 
 import { User } from '@entities/User'
 
+import { routerConfig } from '@shared/config/router.config'
+
 import styles from './header.module.scss'
 
 export const Header = () => {
-	const { resetAuthData, userCredentials } = useAuthorize()
+	const { resetAuthData, currentUser } = useAuthorize()
 	const navigate = useNavigate()
-
-	const { email, displayName, photoURL } = userCredentials?.providerData[0]
 
 	const logout = async () => {
 		await resetAuthData()
@@ -26,12 +26,13 @@ export const Header = () => {
 	return (
 		<div className={styles.header}>
 			<User
-				icon={photoURL ? <Avatar src={photoURL} /> : <UserOutlined />}
+				icon={currentUser?.photoURL ? <Avatar src={currentUser?.photoURL} /> : <UserOutlined />}
 				userInfo={{
-					name: displayName ?? 'no data',
-					email
+					name: currentUser?.displayName ?? 'no data',
+					email: currentUser?.email ?? 'no email'
 				}}
 				onExit={logout}
+				onEdit={() => navigate(`${routerConfig.editUser}`)}
 			/>
 		</div>
 	)

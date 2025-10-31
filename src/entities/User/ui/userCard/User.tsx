@@ -11,19 +11,24 @@ export interface IUser {
 		name: string
 	}
 	onExit: () => void
+	onEdit: () => void
 }
 
-export const User = ({ icon, userInfo, onExit }: IUser) => {
+export const User = ({ icon, userInfo, onExit, onEdit }: IUser) => {
 	return (
 		<Popover
 			placement={'left'}
 			trigger={'click'}
 			content={
-				<Flex vertical gap={'0.2em'}>
-					<div>Login: {userInfo.email}</div>
-					<div>Name: {userInfo.name}</div>
+				<Flex vertical gap={'0.5em'}>
+					<div>Login: {userInfo?.email}</div>
+					<div>Name: {userInfo?.name}</div>
 					<Button danger onClick={onExit}>
 						Exit
+					</Button>
+
+					<Button type={'primary'} onClick={onEdit}>
+						Edit profile
 					</Button>
 				</Flex>
 			}

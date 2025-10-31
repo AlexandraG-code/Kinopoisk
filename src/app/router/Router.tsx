@@ -23,6 +23,7 @@ import { NotFoundPage } from '@pages/NotFound'
 import { PersonPage } from '@pages/PersonPage/ui/PersonPage'
 
 import { routerConfig } from '@shared/config/router.config'
+import { EditUserPage } from '@pages/EditUser'
 
 export const Router = () => {
 	const router = useMemo(() => {
@@ -73,6 +74,16 @@ export const Router = () => {
 							element={
 								<ProtectedRoute>
 									<PersonPage />
+								</ProtectedRoute>
+							}
+						/>
+
+						<Route
+							index
+							path={`${routerConfig.editUser}*`}
+							element={
+								<ProtectedRoute>
+									<EditUserPage />
 								</ProtectedRoute>
 							}
 						/>

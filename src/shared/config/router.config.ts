@@ -5,5 +5,6 @@ export const routerConfig = {
 
 	about: 'about',
 	films: 'films',
-	person: 'person'
+	person: 'person',
+	editUser: 'edit-user'
 }

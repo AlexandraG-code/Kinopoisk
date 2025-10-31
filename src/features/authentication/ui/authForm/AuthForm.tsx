@@ -5,7 +5,9 @@ import { Button, Card, Form, FormProps, Input } from 'antd'
 
 import { AppDispatch, RootState } from '@app/store/BoundingStore'
 
-import { GetUserDTO, login } from '../../model'
+import { GetUserDTO } from '@shared/service/firebase.service'
+
+import { login } from '../../model'
 
 import styles from './AuthForm.module.scss'
 
